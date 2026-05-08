@@ -1,67 +1,33 @@
-import java.util.Scanner;
-import java.util.Random;
-
+/**
+ * TicTacToe
+ * UC4 converts a user-entered slot number (1-9) into corresponding
+ * row and column indices of a 2D array.
+ */
 public class TicTacToe {
-    // UC1: Board representation
-    static char[][] board = new char[3][3];
-    
-    // UC2: Game State Variables
-    static boolean isHumanTurn;
-    static char humanSymbol;
-    static char computerSymbol;
-
-    // UC3: Create Scanner object for input
-    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        initializeBoard();
-        tossAndAssignSymbols();
-        displayTossResult();
-        
-        // UC3: Call method to get input and print it
-        int slot = getUserSlot();
-        System.out.println("Slot entered: " + slot);
-
-        printBoard();
+        // Test with slot 7 as per UC4 requirements
+        int slot = 7;
+        System.out.println("Slot: " + slot);
+        System.out.println("Row: " + getRowFromSlot(slot));
+        System.out.println("Column: " + getColFromSlot(slot));
     }
 
     /**
-     * UC3: Reads an integer slot value (1-9) from the user.
-     * Focuses on input handling without validation for now.
+     * Converts slot number into row index using zero-based indexing.
+     * Input: Slot number (1-9)
+     * Output: Row index (0-2)
      */
-    static int getUserSlot() {
-        System.out.print("Enter a slot number (1-9): ");
-        int slot = sc.nextInt();
-        return slot;
+    static int getRowFromSlot(int slot) {
+        return (slot - 1) / 3;
     }
 
-    // --- UC1 & UC2 Methods ---
-    static void initializeBoard() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) board[i][j] = '-';
-        }
-    }
-
-    static void tossAndAssignSymbols() {
-        Random random = new Random();
-        int toss = random.nextInt(2);
-        if (toss == 0) {
-            isHumanTurn = true; humanSymbol = 'X'; computerSymbol = 'O';
-        } else {
-            isHumanTurn = false; humanSymbol = 'O'; computerSymbol = 'X';
-        }
-    }
-
-    static void displayTossResult() {
-        System.out.println("Toss Result: " + (isHumanTurn ? "Human" : "Computer") + " starts.");
-    }
-
-    static void printBoard() {
-        System.out.println("-------------");
-        for (int i = 0; i < 3; i++) {
-            System.out.print("| ");
-            for (int j = 0; j < 3; j++) System.out.print(board[i][j] + " | ");
-            System.out.println("\n-------------");
-        }
+    /**
+     * Converts slot number into column index using modulo operation.
+     * Input: Slot number (1-9)
+     * Output: Column index (0-2)
+     */
+    static int getColFromSlot(int slot) {
+        return (slot - 1) % 3;
     }
 }
