@@ -1,33 +1,35 @@
 public class TicTacToe {
 
-    static boolean isHumanTurn = true;
-    static boolean gameOver = false;
+    static char[][] board = new char[3][3];
 
     public static void main(String[] args) {
-        // UC8: Continuous Turn-Based Game Loop
-        while (!gameOver) {
-            if (isHumanTurn) {
-                System.out.println("--- Human's Turn ---");
-                // In a full game, you'd call getUserSlot, validate, and placeMove here
-                isHumanTurn = false; // Switch turn
-            } else {
-                System.out.println("--- Computer's Turn ---");
-                // In a full game, you'd call computerMove here
-                isHumanTurn = true; // Switch turn
-            }
-
-            // For demonstration purposes, we stop after a few turns
-            // In UC9/10, this will be replaced by win/draw detection logic
-            checkGameOverManual(); 
-        }
-        System.out.println("Game Over!");
+        // Entry point to test UC9 win-check logic
+        // Example: Setting a winning row
+        board[0][0] = 'X'; board[0][1] = 'X'; board[0][2] = 'X';
+        
+        System.out.println("Has 'X' won? " + hasWon('X'));
     }
 
-    static int turnCount = 0;
-    static void checkGameOverManual() {
-        turnCount++;
-        if (turnCount >= 4) { // Dummy condition to prevent infinite loop for now
-            gameOver = true;
+    /**
+     * UC9: Checks all possible winning patterns (rows, columns, diagonals)
+     * for the given symbol.
+     * Output: true if a win is detected, false otherwise.
+     */
+    static boolean hasWon(char symbol) {
+        // Check Rows and Columns
+        for (int i = 0; i < 3; i++) {
+            if ((board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol) ||
+                (board[0][i] == symbol && board[1][i] == symbol && board[2][i] == symbol)) {
+                return true;
+            }
         }
+
+        // Check Diagonals
+        if ((board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) ||
+            (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol)) {
+            return true;
+        }
+
+        return false;
     }
 }
