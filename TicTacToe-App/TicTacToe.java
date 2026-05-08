@@ -1,27 +1,19 @@
 public class TicTacToe {
 
-    static char[][] board = {
-        {'-', '-', '-'},
-        {'-', '-', '-'},
-        {'-', '-', '-'}
-    };
+    static char[][] board = new char[3][3];
 
     public static void main(String[] args) {
-        // Test UC5 validation logic with a sample move
-        System.out.println("Is move (1, 1) valid? " + isValidMove(1, 1));
+        // Entry point to test UC6
+        placeMove(0, 0, 'X');
+        System.out.println("Board at (0,0): " + board[0][0]);
     }
 
     /**
-     * UC5: Checks if the given row and column are within bounds (0-2)
-     * and if the target cell is empty ('-').
-     * Output: true if valid, false otherwise.
+     * UC6: Updates the board by placing the given symbol at 
+     * the specified row and column.
+     * Hint: Assume the move is already validated.
      */
-    static boolean isValidMove(int row, int col) {
-        // Boundary check: row and col must be between 0 and 2
-        if (row >= 0 && row < 3 && col >= 0 && col < 3) {
-            // Cell empty check: target must contain '-'
-            return board[row][col] == '-';
-        }
-        return false;
+    static void placeMove(int row, int col, char symbol) {
+        board[row][col] = symbol;
     }
 }
